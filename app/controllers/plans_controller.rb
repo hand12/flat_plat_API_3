@@ -14,7 +14,7 @@ class PlansController < ApplicationController
   end
 
   # POST /plans
-  def create
+	def create
     @plan = Plan.new(plan_params)
 
     if @plan.save
@@ -45,7 +45,7 @@ class PlansController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def plan_params
-      params.fetch(:plan, {})
+		def plan_params
+			params.require(:plan).permit(:departure_date, :return_date, :description)
     end
 end
