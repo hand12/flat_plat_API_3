@@ -15,22 +15,22 @@ class PlansController < ApplicationController
 
   # POST /plans
 	def create
-    @plan = Plan.new(plan_params)
+		@plan = Plan.new(plan_params)
 
-    if @plan.save
-      render json: @plan, status: :created, location: @plan
-    else
-      render json: @plan.errors, status: :unprocessable_entity
-    end
+		if @plan.build_location(location_params).save
+			render json: @plan, status: :created, location: @plan
+		else
+			render json: @plan.errors, status: :unprocessable_entity
+		end
   end
 
   # PATCH/PUT /plans/1
-  def update
-    if @plan.update(plan_params)
-      render json: @plan
-    else
-      render json: @plan.errors, status: :unprocessable_entity
-    end
+	def update
+		if @plan.update(plan_params) && @plan.location.update(location_params)
+			render json: @plan
+		else
+			render json: @plan.errors, status: :unprocessable_entity
+		end
   end
 
   # DELETE /plans/1
@@ -47,5 +47,9 @@ class PlansController < ApplicationController
     # Only allow a trusted parameter "white list" through.
 		def plan_params
 			params.require(:plan).permit(:departure_date, :return_date, :description)
-    end
+		end
+		
+		def location_params
+			params.require(:location).permit(:name)
+		end
 end
