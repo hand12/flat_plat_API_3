@@ -50,6 +50,6 @@ class PlansController < ApplicationController
 		end
 		
 		def location_params
-			params.require(:location).permit(:name)
+			params.require(:location).permit(:name, :latitude, :longitude)
 		end
 end
