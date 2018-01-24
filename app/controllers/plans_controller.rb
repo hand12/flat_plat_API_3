@@ -5,6 +5,17 @@ class PlansController < ApplicationController
   def index
     @plans = Plan.all
 
+    # plan: {
+    #   departure_date: 2017/1/24,
+    #   return_date: 2017/1/25,
+    #   description: "hoeghogehoge"
+    #   location: {
+    #     name: 北海道,
+    #     lat: 11111111,
+    #     lng: 22222222
+    #   }
+    # }
+
     render json: @plans
   end
 

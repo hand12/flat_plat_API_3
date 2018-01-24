@@ -23,3 +23,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'geocoder'
+
+# Access-Control-Allow-Originをreposneに簡単に設定できるようにするために導入
+gem 'rack-cors', :require => 'rack/cors'
