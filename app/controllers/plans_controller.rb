@@ -5,18 +5,7 @@ class PlansController < ApplicationController
   def index
     @plans = Plan.all
 
-    # plan: {
-    #   departure_date: 2017/1/24,
-    #   return_date: 2017/1/25,
-    #   description: "hoeghogehoge"
-    #   location: {
-    #     name: 北海道,
-    #     lat: 11111111,
-    #     lng: 22222222
-    #   }
-    # }
-
-    render json: @plans
+    render 'index', formats: 'json', handlers: 'jbuilder'
   end
 
   # GET /plans/1
@@ -31,6 +20,7 @@ class PlansController < ApplicationController
 		if @plan.build_location(location_params).save
 			render json: @plan, status: :created, location: @plan
 		else
+			puts @plan.location.errors
 			render json: @plan.errors, status: :unprocessable_entity
 		end
   end

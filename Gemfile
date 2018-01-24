@@ -26,3 +26,4 @@ gem 'geocoder'
 
 # Access-Control-Allow-Originをreposneに簡単に設定できるようにするために導入
 gem 'rack-cors', :require => 'rack/cors'
+gem 'jbuilder', '~> 2.5'

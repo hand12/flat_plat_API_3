@@ -1,5 +1,7 @@
 class Plan < ApplicationRecord
-	has_one :location, dependent: :destroy, class_name: Location
+	has_one :location, class_name: 'Location', dependent: :destroy
+
+	validates :departure_date, :return_date, presence: true
 
 	RANGE_DISTANCE_BY_KM = 8
 	KM_PER_MI = 1.60934
