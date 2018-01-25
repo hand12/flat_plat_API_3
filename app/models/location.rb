@@ -3,5 +3,5 @@ class Location < ApplicationRecord
 
 	belongs_to :plan
 
-	validates :name, :latitude, :longitude, :plan_id, presence: true
+	validates_presence_of :name, :latitude, :longitude, :plan
 end

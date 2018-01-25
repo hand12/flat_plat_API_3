@@ -15,14 +15,16 @@ class PlansController < ApplicationController
 
   # POST /plans
 	def create
-		@plan = Plan.new(plan_params)
+    @plan = Plan.new(plan_params)
 
-		if @plan.build_location(location_params).save
-			render json: @plan, status: :created, location: @plan
-		else
-			puts @plan.location.errors
-			render json: @plan.errors, status: :unprocessable_entity
-		end
+    ActiveRecord::Base.transaction do
+      @plan.save!
+      @plan.build_location(location_params).save!
+      render json: @plan, status: :created
+    end
+
+  rescue => e
+    render json: e
   end
 
   # PATCH/PUT /plans/1
