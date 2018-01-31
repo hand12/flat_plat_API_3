@@ -9,6 +9,7 @@ class Plan < ApplicationRecord
 	def nears
 		distance = RANGE_DISTANCE_BY_KM / KM_PER_MI
 		center_pointer = [self.location&.latitude, self.location&.longitude]
+		puts self
 		Location.near(center_pointer, distance).map(&:plan).reject{ |plan| plan == self }
 	end
 
